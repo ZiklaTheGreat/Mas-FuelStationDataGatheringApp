@@ -86,6 +86,7 @@ class MainWindow(QMainWindow):
 
         self.table_widget = MyTableWidget()
         self.save_button = QPushButton('Uložiť')
+        self.file_name = None  # Premenná na uchovanie vybraného súboru
 
         # Nastavenie rozloženia
         layout = QVBoxLayout()
@@ -103,6 +104,12 @@ class MainWindow(QMainWindow):
         self.save_button.clicked.connect(self.save_data)
 
     def save_data(self):
+        # Ak ešte nebol vybraný súbor, otvoríme dialóg na jeho výber
+        if self.file_name is None:
+            self.file_name, _ = QFileDialog.getSaveFileName(self, "Uložiť do Excel súboru", "", "Excel Files (*.xlsx)")
+            if not self.file_name:  # Ak užívateľ nezvolil súbor, vrátime sa
+                return
+
         # Načítanie dát z tabuľky
         rowCount = self.table_widget.rowCount()
         colCount = self.table_widget.columnCount()
@@ -122,9 +129,8 @@ class MainWindow(QMainWindow):
         df = pd.DataFrame(data, columns=self.table_widget.headers)
 
         # Uloženie do Excel súboru
-        file_name = 'data.xlsx'
-        df.to_excel(file_name, index=False)
-        print(f'Dáta boli uložené do {file_name}')
+        df.to_excel(self.file_name, index=False)
+        print(f'Dáta boli uložené do {self.file_name}')
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
