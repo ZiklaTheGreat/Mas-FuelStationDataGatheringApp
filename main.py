@@ -31,6 +31,13 @@ class MyTableWidget(QTableWidget):
         # Pripojenie signálu po kliknutí na bunku
         self.cellClicked.connect(self.cell_was_clicked)
 
+    def total_table_width(self):
+        # Vráti celkovú šírku všetkých stĺpcov
+        total_width = 0
+        for i in range(self.columnCount()):
+            total_width += self.columnWidth(i)
+        return total_width
+
     def cell_was_clicked(self, row, column):
         # Po kliknutí na bunku sa označí
         self.setCurrentCell(row, column)
@@ -89,6 +96,9 @@ class MainWindow(QMainWindow):
         container.setLayout(layout)
 
         self.setCentralWidget(container)
+
+        table_width = self.table_widget.total_table_width()
+        self.resize(table_width + 40, 600)
 
         self.save_button.clicked.connect(self.save_data)
 
