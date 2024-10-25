@@ -17,6 +17,10 @@ class MyTableWidget(QTableWidget):
         self.setHorizontalHeaderLabels(self.headers)
         self.setRowCount(0)
 
+        # Nastavenie šírky každého stĺpca podľa nadpisu
+        for i in range(len(self.headers)):
+            self.resizeColumnToContents(i)
+
         # Povoliť výber bunky
         self.setSelectionMode(QTableWidget.SingleSelection)
         self.setSelectionBehavior(QTableWidget.SelectItems)
@@ -38,7 +42,7 @@ class MyTableWidget(QTableWidget):
         if key == Qt.Key_Space:
             # Zapísať aktuálny čas do označenej bunky
             if current_row >= 0 and current_column >= 0:
-                current_time = QDateTime.currentDateTime().toString("hh:mm:ss yyyy-MM-dd")
+                current_time = QDateTime.currentDateTime().toString("hh:mm:ss")
                 self.setItem(current_row, current_column, QTableWidgetItem(current_time))
                 # Posunúť označenú bunku o jednu doprava (ak je to možné)
                 if current_column + 1 < self.columnCount():
@@ -49,7 +53,7 @@ class MyTableWidget(QTableWidget):
             self.insertRow(new_row)
             car_number = f"Auto {new_row + 1}"
             self.setItem(new_row, 0, QTableWidgetItem(car_number))
-            current_time = QDateTime.currentDateTime().toString("hh:mm:ss yyyy-MM-dd")
+            current_time = QDateTime.currentDateTime().toString("hh:mm:ss")
             # Stĺpec príchodu je druhý stĺpec (index 1)
             self.setItem(new_row, 1, QTableWidgetItem(current_time))
             # Označiť bunku príchodu v novom riadku
