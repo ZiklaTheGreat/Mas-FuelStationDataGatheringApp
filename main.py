@@ -8,10 +8,10 @@ class MyTableWidget(QTableWidget):
         super(MyTableWidget, self).__init__(parent)
 
         # Definícia hlavičiek
-        self.headers = ["Číslo auta", "Príchod", "Príchod k pumpe", "Začiatok takovania", "Koniec tankovania",
+        self.headers = ["Číslo auta", "Príchod", "Príchod k pumpe", "Začiatok tankovania", "Koniec tankovania",
                         "Príchod do rady na platenie", "Príchod na rad", "Dokončenie platby", "Príchod do auta",
-                        "Čas odchodu"]
-        # Ľahko pridáte ďalšie stĺpce pridaním do self.headers
+                        "Čas odchodu", "Čas príchodu do radu na kávu", "Príchod ku kávovaru", "Čas sadnutia si",
+                        "Čas odchodu zo sadnutia"]
 
         self.setColumnCount(len(self.headers))
         self.setHorizontalHeaderLabels(self.headers)
