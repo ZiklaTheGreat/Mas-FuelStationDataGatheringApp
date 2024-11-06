@@ -104,33 +104,40 @@ class MainWindow(QMainWindow):
         self.save_button.clicked.connect(self.save_data)
 
     def save_data(self):
-        # Ak ešte nebol vybraný súbor, otvoríme dialóg na jeho výber
-        if self.file_name is None:
+        # Ak ešte nebol vybraný súbor alebo je názov neplatný, otvoríme dialóg na jeho výber
+        if not self.file_name:
             self.file_name, _ = QFileDialog.getSaveFileName(self, "Uložiť do Excel súboru", "", "Excel Files (*.xlsx)")
             if not self.file_name:  # Ak užívateľ nezvolil súbor, vrátime sa
                 return
 
-        # Načítanie dát z tabuľky
-        rowCount = self.table_widget.rowCount()
-        colCount = self.table_widget.columnCount()
+        try:
+            # Načítanie dát z tabuľky
+            rowCount = self.table_widget.rowCount()
+            colCount = self.table_widget.columnCount()
 
-        data = []
-        for row in range(rowCount):
-            rowData = []
-            for column in range(colCount):
-                item = self.table_widget.item(row, column)
-                if item is not None:
-                    rowData.append(item.text())
-                else:
-                    rowData.append('')
-            data.append(rowData)
+            data = []
+            for row in range(rowCount):
+                rowData = []
+                for column in range(colCount):
+                    item = self.table_widget.item(row, column)
+                    if item is not None:
+                        rowData.append(item.text())
+                    else:
+                        rowData.append('')
+                data.append(rowData)
 
-        # Konverzia na pandas DataFrame
-        df = pd.DataFrame(data, columns=self.table_widget.headers)
+            # Konverzia na pandas DataFrame
+            df = pd.DataFrame(data, columns=self.table_widget.headers)
 
-        # Uloženie do Excel súboru
-        df.to_excel(self.file_name, index=False)
-        print(f'Dáta boli uložené do {self.file_name}')
+            # Uloženie do Excel súboru
+            df.to_excel(self.file_name, index=False)
+            print(f'Dáta boli uložené do {self.file_name}')
+
+        except Exception as e:
+            print(f"Chyba pri ukladaní: {e}")
+            # Ak sa vyskytla chyba, nastavíme `self.file_name` na `None`, aby sa dialóg opäť otvoril
+            self.file_name = None
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
