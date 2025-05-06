@@ -1,8 +1,20 @@
-# Project Installation Guide
+# Statistics Library
 
-This guide provides step-by-step instructions to install and build the project on your system.
+A C++ library for performing various statistical computations using the [Armadillo](http://arma.sourceforge.net/) linear algebra library. This project was developed as part of a bachelor's thesis.
 
-## Installation Steps
+## Features
+
+- Core statistical functions
+- Easy integration with Armadillo
+- Simple demonstration app included
+
+## Prerequisites
+
+- C++17 compiler (e.g., g++, clang++)
+- CMake 3.10+
+- [BLAS and LAPACK](http://www.netlib.org/lapack/) libraries (usually preinstalled on most systems or installable via package manager)
+
+## Installation
 
 ### 1. Clone the Repository
 Start by cloning the project repository to your local machine using the following command:
