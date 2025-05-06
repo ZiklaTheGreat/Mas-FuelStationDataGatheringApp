@@ -21,7 +21,8 @@ Start by cloning the project repository to your local machine using the followin
 
 ```bash
 git clone https://github.com/ZiklaTheGreat/Statistics-library
-cd <project-directory>
+cd Statistics-library
+git submodule update --init --recursive
 ```
 
 ### 2. Build the Armadillo Library
@@ -42,4 +43,11 @@ mkdir build
 cd build
 cmake ..
 make
+```
+
+## Usage
+After building, you can run the demonstration application:
+
+```bash
+./main_app
 ```
