@@ -8,7 +8,7 @@ This guide provides step-by-step instructions to install and build the project o
 Start by cloning the project repository to your local machine using the following command:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/ZiklaTheGreat/Statistics-library
 cd <project-directory>
 ```
 
