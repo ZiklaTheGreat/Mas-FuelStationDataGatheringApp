@@ -2,14 +2,6 @@
 
 This guide provides step-by-step instructions to install and build the project on your system.
 
-## Prerequisites
-
-- **Git**: Ensure Git is installed to clone the repository.
-- **CMake**: Required for building the project (version 3.10 or higher recommended).
-- **Make**: Needed for compiling the project.
-- **C++ Compiler**: A compatible C++ compiler (e.g., GCC, Clang) that supports C++17.
-- **Armadillo Library**: The project uses the Armadillo library for linear algebra, which will be built from source.
-
 ## Installation Steps
 
 ### 1. Clone the Repository
@@ -18,11 +10,24 @@ Start by cloning the project repository to your local machine using the followin
 ```bash
 git clone <repository-url>
 cd <project-directory>
+```
+
+### 2. Build the Armadillo Library
+The project depends on the Armadillo library, which is included in the third_party/armadillo-code/ directory. Follow these steps to build it:
+
+```bash
 cd third_party/armadillo-code/
 cmake .
 make
+```
+
+### 3. Build the Main Project
+Create a build directory and compile the main project using the following commands:
+
+```bash
 cd ../
 mkdir build
 cd build
 cmake ..
 make
+```
